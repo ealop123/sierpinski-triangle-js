@@ -1,0 +1,69 @@
+:root {
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  position: absolute;
+  inset: 0;
+}
+
+canvas {
+  width: 100%;
+  height: 100%;
+  border: 1px inset black;
+  cursor: url("./dot.svg"), auto;
+}
+
+.cursor {
+  --x: 0;
+  --y: 0;
+  width: 10px;
+  aspect-ratio: 1;
+  background-color: black;
+  position: fixed;
+  left: var(--x);
+  top: var(--y);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.message-prompt {
+  --transition-time: 0.5s;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  background-color: lightgray;
+  text-align: center;
+  font-size: 2rem;
+  transform-origin: top;
+
+  transition: transform var(--transition-time);
+}
+
+.message-prompt.hidden {
+  transition:
+    transform
+    calc(var(--transition-time) * .8)
+    calc(var(--transition-time) * .2);
+  transform: scaleY(0);
+}
+
+.message-prompt .message-prompt__text {
+  opacity: 1;
+  transition: opacity var(--transition-time);
+}
+
+.message-prompt.hidden .message-prompt__text {
+  opacity: 0;
+}
+
+.debugging {
+  border: 1px solid black;
+  background-color: rgba(20, 100, 255, 0.2);
+  min-height: 2rem;
+  min-width: 2rem;
+}
