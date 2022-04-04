@@ -39,13 +39,14 @@ Please enjoy this web art demonstrating the Sierpinski triangle!
     async function addDot(e) {
       const {x, y} = e;
       dots.push([x, y]);
-      const dotSize = 10;
+      const dotSize = 1;
       ctx.fillRect(x, y, dotSize, dotSize);
       if (dots.length != 3) return;
       canvas.removeEventListener("click", addDot);
       const allDots = [...dots];
       let cntr = 0;
       while (++cntr < 1e6) {
+        if (cntr % 500 == 0) showMessage(`${allDots.length} dots shown! ${cntr} attempted!`, 1000);
         const {floor, random, max, min} = Math;
         const randomDot = allDots[floor(random() * allDots.length)];
         const originalDot = dots[floor(random() * dots.length)];
@@ -67,7 +68,7 @@ Please enjoy this web art demonstrating the Sierpinski triangle!
         allDots.push([nx, ny]);
         ctx.fillRect(nx, ny, dotSize, dotSize)
       }
-      console.log("limit exceeded");
+      await showMessage("1 million attempts exceeded! Stopping 😁");
     }
     canvas.addEventListener("click", addDot);
   })();
